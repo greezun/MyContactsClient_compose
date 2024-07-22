@@ -1,4 +1,4 @@
-package com.shppshcool.maslak.mycontacts.presentation.screens.autth
+package com.shppshcool.maslak.mycontacts.presentation.screens.autth.sign_up.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -40,12 +40,23 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.shppshcool.maslak.mycontacts.R
+import com.shppshcool.maslak.mycontacts.presentation.screens.autth.AuthOutlineButton
+import com.shppshcool.maslak.mycontacts.presentation.screens.autth.SpannedClickableText
+import com.shppshcool.maslak.mycontacts.presentation.screens.autth.sign_up.SignUpContract
 import com.shppshcool.maslak.mycontacts.presentation.screens.utils.spanList
 import com.shppshcool.maslak.mycontacts.ui.theme.GrayText2
 import com.shppshcool.maslak.mycontacts.ui.theme.MyContactsTheme
+import kotlinx.coroutines.flow.Flow
 
 @Composable
-fun SignUpScreen(modifier: Modifier = Modifier) {
+fun SignUpScreen(
+    modifier: Modifier = Modifier,
+    state: SignUpContract.State,
+    effectFlow: Flow<SignUpContract.Effect>?,
+    onEventSent: (event: SignUpContract.Event) -> Unit,
+    onNavigationRequested: (SignUpContract.Effect.Navigation) -> Unit
+
+) {
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -53,14 +64,14 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
     )
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         Column(
-            modifier = Modifier.weight(0.7f),
+            modifier = Modifier.weight(0.6f),
             verticalArrangement = Arrangement.Bottom
         ) {
             Text(
@@ -77,15 +88,14 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
         }
 
 
-        Column(modifier = Modifier.weight(1f),
+        Column(
+            modifier = Modifier.weight(1f),
             horizontalAlignment = Alignment.CenterHorizontally
 
         ) {
             var email by remember {
                 mutableStateOf("")
             }
-
-
 
             Spacer(modifier = Modifier.height(24.dp))
             Text(
@@ -96,8 +106,8 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
             )
 
             TextField(
-                value = email,
-                onValueChange = { email = it },
+                value = state.email,
+                onValueChange = { onEventSent(SignUpContract.Event.Email(it)) },
                 modifier = Modifier.fillMaxWidth(),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
@@ -122,8 +132,8 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
             )
 
             TextField(
-                value = password,
-                onValueChange = { password = it },
+                value = state.password,
+                onValueChange = { onEventSent(SignUpContract.Event.Password(it)) },
                 modifier = Modifier.fillMaxWidth(),
                 visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 colors = TextFieldDefaults.colors(
@@ -143,20 +153,19 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
                         Icon(
                             painter = painterResource(id = image),
-                            contentDescription = if (passwordVisible) "Hide password" else "Show password"
+                            contentDescription = null
                         )
                     }
                 }
             )
 
-            val (checkedState, onStateChange) = remember { mutableStateOf(false) }
             Row(
                 Modifier
                     .fillMaxWidth()
                     .height(56.dp)
                     .toggleable(
-                        value = checkedState,
-                        onValueChange = { onStateChange(!checkedState) },
+                        value = state.checkboxChecked,
+                        onValueChange = { onEventSent(SignUpContract.Event.Checkbox) },
                         role = Role.Checkbox
                     ),
                 verticalAlignment = Alignment.CenterVertically
@@ -168,7 +177,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
                         .border(1.dp, MaterialTheme.colorScheme.onPrimary, RoundedCornerShape(4.dp))
                 )
                 {
-                    if (checkedState) {
+                    if (state.checkboxChecked) {
                         Icon(
                             imageVector = Icons.Default.Done, contentDescription = null,
                             tint = MaterialTheme.colorScheme.onPrimary
@@ -184,7 +193,8 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
                 )
             }
         }
-        Column(modifier = Modifier.weight(1f),
+        Column(
+            modifier = Modifier.weight(1f),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -213,12 +223,16 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
 
             }
             Spacer(modifier = Modifier.height(24.dp))
-            Text(text = stringResource(R.string.or),
+            Text(
+                text = stringResource(R.string.or),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onPrimary
             )
             Spacer(modifier = Modifier.height(24.dp))
-            AuthOutlineButton(textResource = R.string.register) {
+            AuthOutlineButton(
+                textResource = R.string.register,
+                enable = state.registerButtonEnabled
+            ) {
 
             }
 
@@ -247,7 +261,22 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun Preview() {
     MyContactsTheme {
-        SignUpScreen()
+        SignUpScreen(
+            state = SignUpContract.State(
+                email = "",
+                isEmailError = false,
+                emailErrorText = "",
+                password = "",
+                isPasswordError = false,
+                passwordErrorText = "",
+                checkboxChecked = false
+
+            ),
+            effectFlow = null,
+            onEventSent = {},
+            onNavigationRequested = {}
+        )
 
     }
+
 }
