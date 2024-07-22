@@ -1,4 +1,4 @@
-package com.shppshcool.maslak.mycontacts.presentation.screens.profile.utils
+package com.shppshcool.maslak.mycontacts.presentation.screens.utils
 
 import com.shppshcool.maslak.mycontacts.data.model.auth.SpanText
 

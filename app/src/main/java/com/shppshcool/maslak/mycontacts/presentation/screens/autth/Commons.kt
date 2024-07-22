@@ -1,4 +1,4 @@
-package com.shppshcool.maslak.mycontacts.presentation.screens.profile.autth
+package com.shppshcool.maslak.mycontacts.presentation.screens.autth
 
 
 import androidx.compose.foundation.gestures.detectTapGestures

@@ -1,4 +1,4 @@
-package com.shppshcool.maslak.mycontacts.presentation.screens.profile.autth
+package com.shppshcool.maslak.mycontacts.presentation.screens.autth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,13 +33,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.shppshcool.maslak.mycontacts.R
-import com.shppshcool.maslak.mycontacts.presentation.screens.profile.utils.spanList
+import com.shppshcool.maslak.mycontacts.presentation.screens.utils.spanList
 import com.shppshcool.maslak.mycontacts.ui.theme.GrayText2
 import com.shppshcool.maslak.mycontacts.ui.theme.MyContactsTheme
 
@@ -63,13 +64,13 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.Bottom
         ) {
             Text(
-                text = "Let's get acquainted",
+                text = stringResource(R.string.get_acquainted),
                 style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onPrimary
             )
 
             Text(
-                text = "Fill out the profile and go to the application!",
+                text = stringResource(R.string.fill_out_the_profile),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onPrimary
             )
@@ -88,7 +89,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(24.dp))
             Text(
-                text = "E-mail",
+                text = stringResource(R.string.e_mail),
                 modifier = Modifier.align(Alignment.Start),
                 style = MaterialTheme.typography.labelLarge,
                 color = GrayText2
@@ -114,7 +115,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
             var passwordVisible by remember { mutableStateOf(false) }
             Spacer(modifier = Modifier.height(24.dp))
             Text(
-                text = "Password",
+                text = stringResource(R.string.password),
                 modifier = Modifier.align(Alignment.Start),
                 style = MaterialTheme.typography.labelLarge,
                 color = GrayText2
@@ -176,7 +177,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
 
                 }
                 Text(
-                    text = "Remember me",
+                    text = stringResource(R.string.remember_me),
                     style = MaterialTheme.typography.labelLarge,
                     color = GrayText2,
                     modifier = Modifier.padding(start = 16.dp)
@@ -207,30 +208,31 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
                         contentDescription = null
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = "google".uppercase())
+                    Text(text = stringResource(R.string.google).uppercase())
                 }
 
             }
             Spacer(modifier = Modifier.height(24.dp))
-            Text(text = "or",
+            Text(text = stringResource(R.string.or),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onPrimary
             )
             Spacer(modifier = Modifier.height(24.dp))
+            AuthOutlineButton(textResource = R.string.register) {
 
-
+            }
 
 
             Spacer(modifier = Modifier.height(24.dp))
             SpannedClickableText(
                 modifier = Modifier.padding(horizontal = 40.dp),
-                fullText = "By clicking Register you agree to our Terms and Conditions",
+                fullText = stringResource(R.string.by_clicking_register),
                 spans = spanList
             )
             Spacer(modifier = Modifier.height(24.dp))
             SpannedClickableText(
                 modifier = Modifier.fillMaxWidth(),
-                fullText = "Already have an account? Sign in",
+                fullText = stringResource(R.string.already_have_an_account),
                 spans = spanList,
                 style = MaterialTheme.typography.labelLarge
             )

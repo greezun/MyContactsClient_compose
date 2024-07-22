@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">My Contacts</string>
+    <string name="by_clicking_register">By clicking Register you agree to our Terms and Conditions</string>
+    <string name="already_have_an_account">Already have an account? Sign in</string>
+    <string name="remember_me">Remember me</string>
+    <string name="password">Password</string>
+    <string name="e_mail">E-mail</string>
+    <string name="fill_out_the_profile">Fill out the profile and go to the application!</string>
+    <string name="get_acquainted">Let\'s get acquainted</string>
+    <string name="google">google</string>
+    <string name="or">or</string>
+    <string name="register">register</string>
 </resources>

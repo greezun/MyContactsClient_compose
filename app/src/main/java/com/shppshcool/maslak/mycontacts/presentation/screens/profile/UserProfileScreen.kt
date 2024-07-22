@@ -30,7 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.shppshcool.maslak.mycontacts.R
-import com.shppshcool.maslak.mycontacts.presentation.screens.profile.utils.socialNetworkImage
+import com.shppshcool.maslak.mycontacts.presentation.screens.utils.socialNetworkImage
 import com.shppshcool.maslak.mycontacts.ui.theme.MyContactsTheme
 
 @Composable
