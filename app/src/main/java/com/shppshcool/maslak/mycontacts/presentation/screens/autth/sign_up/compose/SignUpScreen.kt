@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,10 +44,13 @@ import com.shppshcool.maslak.mycontacts.R
 import com.shppshcool.maslak.mycontacts.presentation.screens.autth.AuthOutlineButton
 import com.shppshcool.maslak.mycontacts.presentation.screens.autth.SpannedClickableText
 import com.shppshcool.maslak.mycontacts.presentation.screens.autth.sign_up.SignUpContract
+import com.shppshcool.maslak.mycontacts.presentation.screens.base.SIDE_EFFECTS_KEY
 import com.shppshcool.maslak.mycontacts.presentation.screens.utils.spanList
 import com.shppshcool.maslak.mycontacts.ui.theme.GrayText2
 import com.shppshcool.maslak.mycontacts.ui.theme.MyContactsTheme
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.collect
 
 @Composable
 fun SignUpScreen(
@@ -57,10 +61,21 @@ fun SignUpScreen(
     onNavigationRequested: (SignUpContract.Effect.Navigation) -> Unit
 
 ) {
+
+    LaunchedEffect(SIDE_EFFECTS_KEY) {
+        effectFlow?.onEach { effect ->
+            when (effect) {
+                is SignUpContract.Effect.Navigation.ToProfileDetail -> onNavigationRequested(effect)
+            }
+        }?.collect()
+    }
+
+
+
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.primary)
+            .background(MaterialTheme.colorScheme.tertiary)
     )
 
     Column(
@@ -91,11 +106,7 @@ fun SignUpScreen(
         Column(
             modifier = Modifier.weight(1f),
             horizontalAlignment = Alignment.CenterHorizontally
-
         ) {
-            var email by remember {
-                mutableStateOf("")
-            }
 
             Spacer(modifier = Modifier.height(24.dp))
             Text(
@@ -107,9 +118,18 @@ fun SignUpScreen(
 
             TextField(
                 value = state.email,
-                onValueChange = { onEventSent(SignUpContract.Event.Email(it)) },
+                onValueChange = { onEventSent(SignUpContract.Event.Email(it.trim())) },
                 modifier = Modifier.fillMaxWidth(),
+                isError = state.isEmailError,
+                singleLine = true,
+                supportingText = {
+                    val text =
+                        if (state.isEmailError) stringResource(R.string.email_error_message) else ""
+                    Text(text)
+                },
                 colors = TextFieldDefaults.colors(
+                    errorContainerColor = Color.Transparent,
+                    errorTextColor = MaterialTheme.colorScheme.error,
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
                     cursorColor = MaterialTheme.colorScheme.onPrimary,
@@ -118,10 +138,6 @@ fun SignUpScreen(
                 )
             )
 
-            var password by remember {
-                mutableStateOf("")
-
-            }
             var passwordVisible by remember { mutableStateOf(false) }
             Spacer(modifier = Modifier.height(24.dp))
             Text(
@@ -135,8 +151,17 @@ fun SignUpScreen(
                 value = state.password,
                 onValueChange = { onEventSent(SignUpContract.Event.Password(it)) },
                 modifier = Modifier.fillMaxWidth(),
+                isError = state.isPasswordError,
+                singleLine = true,
+                supportingText = {
+                    val text =
+                        if (state.isPasswordError) stringResource(R.string.password_error_message) else ""
+                    Text(text)
+                },
                 visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 colors = TextFieldDefaults.colors(
+                    errorContainerColor = Color.Transparent,
+                    errorTextColor = MaterialTheme.colorScheme.error,
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
                     cursorColor = MaterialTheme.colorScheme.onPrimary,
@@ -195,44 +220,16 @@ fun SignUpScreen(
         }
         Column(
             modifier = Modifier.weight(1f),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Bottom
         ) {
 
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(60.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.background,
-                        shape = MaterialTheme.shapes.small
-                    ),
-                contentAlignment = Alignment.Center
-
-            ) {
-
-                Row {
-                    Image(
-                        modifier = Modifier.size(20.dp),
-                        painter = painterResource(id = R.drawable.g),
-                        contentDescription = null
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = stringResource(R.string.google).uppercase())
-                }
-
-            }
-            Spacer(modifier = Modifier.height(24.dp))
-            Text(
-                text = stringResource(R.string.or),
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onPrimary
-            )
             Spacer(modifier = Modifier.height(24.dp))
             AuthOutlineButton(
                 textResource = R.string.register,
                 enable = state.registerButtonEnabled
             ) {
+                onEventSent(SignUpContract.Event.Register)
 
             }
 
@@ -264,11 +261,9 @@ private fun Preview() {
         SignUpScreen(
             state = SignUpContract.State(
                 email = "",
-                isEmailError = false,
-                emailErrorText = "",
+                isEmailError = true,
                 password = "",
-                isPasswordError = false,
-                passwordErrorText = "",
+                isPasswordError = true,
                 checkboxChecked = false
 
             ),

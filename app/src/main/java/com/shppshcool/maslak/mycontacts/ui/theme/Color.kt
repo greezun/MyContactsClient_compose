@@ -9,5 +9,5 @@ val Blue = Color(0xFF242235)
 val Orange = Color(0xFFFB5E06)
 val GrayText = Color(0xFF18181F)
 val GrayText2 = Color(0xFFB2B2B3)
-val Background = Color(0xFFE7E7E7)
+
 

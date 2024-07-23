@@ -10,4 +10,6 @@
     <string name="google">google</string>
     <string name="or">or</string>
     <string name="register">register</string>
+    <string name="password_error_message">Must contain 8 characters, letters and numbers</string>
+    <string name="email_error_message">Invalid email</string>
 </resources>

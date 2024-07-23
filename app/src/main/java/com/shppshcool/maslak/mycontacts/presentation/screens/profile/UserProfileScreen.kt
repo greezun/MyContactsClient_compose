@@ -40,7 +40,7 @@ fun UserProfileScreen(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .weight(1f)
-                .background(MaterialTheme.colorScheme.primary)
+                .background(MaterialTheme.colorScheme.tertiary)
         ) {
 
             val scrollState = rememberScrollState()
@@ -144,7 +144,7 @@ fun UserProfileScreen(modifier: Modifier = Modifier) {
                         colors = ButtonDefaults.outlinedButtonColors(
                             contentColor = MaterialTheme.colorScheme.onSurface
                         ),
-                        border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
+                        border = BorderStroke(2.dp, MaterialTheme.colorScheme.tertiary)
                     ) {
                         Text(text = "Edit profile")
 
@@ -157,9 +157,7 @@ fun UserProfileScreen(modifier: Modifier = Modifier) {
                         modifier = Modifier
                             .fillMaxWidth(),
                         shape = MaterialTheme.shapes.small,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.tertiary
-                        )
+//
 
                     ) {
                         Text(

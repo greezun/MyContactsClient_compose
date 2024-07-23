@@ -16,10 +16,8 @@ class SignUpContract {
     data class State(
         val email: String = "",
         val isEmailError: Boolean = false,
-        val emailErrorText: String = "",
         val password: String = "",
         val isPasswordError: Boolean = false,
-        val passwordErrorText: String = "",
         val checkboxChecked: Boolean = true,
     ):ViewState {
         val registerButtonEnabled = email.isNotBlank() && password.isNotBlank()
@@ -28,7 +26,7 @@ class SignUpContract {
     sealed class Effect : ViewSideEffect {
 
         sealed class Navigation : Effect() {
-            data class ToDetail(val userId: String): Navigation()
+            data object ToProfileDetail: Navigation()
         }
     }
 
