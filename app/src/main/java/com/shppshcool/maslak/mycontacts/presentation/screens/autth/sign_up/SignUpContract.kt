@@ -8,25 +8,35 @@ class SignUpContract {
 
     sealed class Event : ViewEvent {
         data object Register : Event()
-        data class Email(val text:String):Event()
-        data class Password(val text:String):Event()
-        data object Checkbox:Event()
+        data class Email(val text: String) : Event()
+        data class Password(val text: String) : Event()
+        data object Checkbox : Event()
     }
 
     data class State(
-        val email: String = "",
-        val isEmailError: Boolean = false,
-        val password: String = "",
-        val isPasswordError: Boolean = false,
-        val checkboxChecked: Boolean = true,
-    ):ViewState {
+        val email: String,
+        val isEmailError: Boolean,
+        val password: String,
+        val isPasswordError: Boolean,
+        val rememberMe: Boolean,
+    ) : ViewState {
         val registerButtonEnabled = email.isNotBlank() && password.isNotBlank()
+
+        companion object {
+            fun empty() = State(
+                email = "",
+                isEmailError = false,
+                password = "",
+                isPasswordError = false,
+                rememberMe = false
+            )
+        }
     }
 
     sealed class Effect : ViewSideEffect {
 
         sealed class Navigation : Effect() {
-            data object ToProfileDetail: Navigation()
+            data object ToProfileDetail : Navigation()
         }
     }
 

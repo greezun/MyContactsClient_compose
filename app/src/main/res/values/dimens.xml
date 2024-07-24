@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="standard_padding">16dp</dimen>
+    <dimen name="main_avatar_size">113dp</dimen>
+    <dimen name="add_picture_size">55dp</dimen>
+
+</resources>

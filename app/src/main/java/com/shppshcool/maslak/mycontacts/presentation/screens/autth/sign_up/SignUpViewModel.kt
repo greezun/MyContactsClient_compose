@@ -7,21 +7,15 @@ import com.shppshcool.maslak.mycontacts.presentation.screens.utils.TAG
 
 const val PASS_REGEX = "^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$"
 class SignUpViewModel:BaseViewModel<SignUpContract.Event, SignUpContract.State, SignUpContract.Effect>( ) {
-    override fun setInitialState()= SignUpContract.State(
-        email = "",
-        isEmailError = false,
-        password = "",
-        isPasswordError = false,
-        checkboxChecked = false
-    )
+    override fun setInitialState()= SignUpContract.State.empty()
 
     override fun handleEvents(event: SignUpContract.Event) {
         when(event){
             is SignUpContract.Event.Email -> setState { copy(email=event.text) }
             is SignUpContract.Event.Password->setState { copy(password=event.text) }
             is SignUpContract.Event.Checkbox -> setState {
-                Log.d(TAG, "handleEvents: ${this.checkboxChecked}")
-                copy(checkboxChecked= !this.checkboxChecked)
+                Log.d(TAG, "handleEvents: ${this.rememberMe}")
+                copy(rememberMe= !this.rememberMe)
 
             }
             is SignUpContract.Event.Register -> {
@@ -39,8 +33,7 @@ class SignUpViewModel:BaseViewModel<SignUpContract.Event, SignUpContract.State, 
     }
 
     private fun isValidPassword(password: String): Boolean {
-        val passwordPattern = PASS_REGEX
-        val pattern = Regex(passwordPattern)
+        val pattern = Regex(PASS_REGEX)
         return password.isNotEmpty() && pattern.matches(password)
     }
 }

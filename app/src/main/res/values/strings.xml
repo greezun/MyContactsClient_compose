@@ -12,4 +12,10 @@
     <string name="register">register</string>
     <string name="password_error_message">Must contain 8 characters, letters and numbers</string>
     <string name="email_error_message">Invalid email</string>
+    <string name="add_profile_detail_title">Your profile data</string>
+    <string name="add_profile_detail_subtitle">Fill out the profile and go to the application!</string>
+    <string name="user_name">User name</string>
+    <string name="phone">Mobile phone</string>
+    <string name="cansel">Cansel</string>
+    <string name="forward">forward</string>
 </resources>

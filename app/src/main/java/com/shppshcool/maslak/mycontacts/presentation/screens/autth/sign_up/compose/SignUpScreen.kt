@@ -1,6 +1,5 @@
 package com.shppshcool.maslak.mycontacts.presentation.screens.autth.sign_up.compose
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -13,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -189,7 +187,7 @@ fun SignUpScreen(
                     .fillMaxWidth()
                     .height(56.dp)
                     .toggleable(
-                        value = state.checkboxChecked,
+                        value = state.rememberMe,
                         onValueChange = { onEventSent(SignUpContract.Event.Checkbox) },
                         role = Role.Checkbox
                     ),
@@ -202,7 +200,7 @@ fun SignUpScreen(
                         .border(1.dp, MaterialTheme.colorScheme.onPrimary, RoundedCornerShape(4.dp))
                 )
                 {
-                    if (state.checkboxChecked) {
+                    if (state.rememberMe) {
                         Icon(
                             imageVector = Icons.Default.Done, contentDescription = null,
                             tint = MaterialTheme.colorScheme.onPrimary
@@ -261,10 +259,10 @@ private fun Preview() {
         SignUpScreen(
             state = SignUpContract.State(
                 email = "",
-                isEmailError = true,
+                isEmailError = false,
                 password = "",
-                isPasswordError = true,
-                checkboxChecked = false
+                isPasswordError = false,
+                rememberMe = false
 
             ),
             effectFlow = null,
