@@ -34,10 +34,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.shppshcool.maslak.mycontacts.R
 import com.shppshcool.maslak.mycontacts.presentation.screens.autth.PagerTitle
-import com.shppshcool.maslak.mycontacts.presentation.screens.autth.sign_up.SignUpContract
 import com.shppshcool.maslak.mycontacts.presentation.screens.commons.MainButton
 import com.shppshcool.maslak.mycontacts.presentation.screens.commons.SecondaryButton
-import com.shppshcool.maslak.mycontacts.ui.theme.GrayText
 import com.shppshcool.maslak.mycontacts.ui.theme.GrayText2
 import com.shppshcool.maslak.mycontacts.ui.theme.MyContactsTheme
 import com.shppshcool.maslak.mycontacts.ui.theme.White
@@ -135,9 +133,7 @@ fun AddProfileData(modifier: Modifier = Modifier) {
                 )
             }
 
-
             Column(modifier = Modifier.fillMaxWidth()) {
-
                 SecondaryButton(color = White, text = stringResource(id = R.string.cansel)) {
 
                 }
@@ -147,8 +143,6 @@ fun AddProfileData(modifier: Modifier = Modifier) {
                 ) {
 
                 }
-
-
             }
         }
     }
