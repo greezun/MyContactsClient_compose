@@ -1,4 +1,4 @@
-package com.shppshcool.maslak.mycontacts.data.model.auth
+package com.shppshcool.maslak.mycontacts.presentation.screens.autth
 
 data class SpanText(
     val text:String,

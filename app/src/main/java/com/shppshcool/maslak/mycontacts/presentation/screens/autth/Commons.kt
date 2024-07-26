@@ -16,7 +16,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import com.shppshcool.maslak.mycontacts.data.model.auth.SpanText
 import com.shppshcool.maslak.mycontacts.ui.theme.GrayText2
 
 @Composable

@@ -1,6 +1,6 @@
 package com.shppshcool.maslak.mycontacts.presentation.screens.utils
 
-import com.shppshcool.maslak.mycontacts.data.model.auth.SpanText
+import com.shppshcool.maslak.mycontacts.presentation.screens.autth.SpanText
 
 val spanList  = listOf(
     SpanText(
